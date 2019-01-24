@@ -1,0 +1,19 @@
+---
+- name: create {{ java_install_dir }}
+  file:
+    path: "{{ java_install_dir }}"
+    state: directory
+    mode: 0755
+
+- name: create {{ java_install_dir }}/{{ java_version }}
+  file:
+    path: "{{ java_install_dir }}/{{ java_version }}"
+    state: directory
+    mode: 0755
+
+
+- name: Extract java into {{ java_install_dir }}/{{ java_version }}
+  unarchive:
+    src: "{{ java_install_tar }}"
+    dest: "{{ java_install_dir }}/{{ java_version }}"
+    extra_opts: [--strip-components=1]
